@@ -1,0 +1,977 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Gu.Wpf.Adorners</name>
+    </assembly>
+    <members>
+        <member name="T:Gu.Wpf.Adorners.AdornerService">
+            <summary>
+            Helper class for adding and removing adorners to the <see cref="T:System.Windows.Documents.AdornerLayer"/>.
+            </summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.AdornerService.Show(System.Windows.Documents.Adorner)">
+            <summary>
+            Adds <paramref name="adorner"/> to the <see cref="T:System.Windows.Documents.AdornerLayer"/>
+            If no adorner layer is present a retry is performed with  DispatcherPriority.Loaded.
+            </summary>
+            <param name="adorner">The <see cref="T:System.Windows.Documents.Adorner"/>.</param>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.AdornerService.Remove(System.Windows.Documents.Adorner)">
+            <summary>
+            Removes <paramref name="adorner"/> from the <see cref="T:System.Windows.Documents.AdornerLayer"/>.
+            </summary>
+            <param name="adorner">The <see cref="T:System.Windows.Documents.Adorner"/>.</param>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.AdornerService.GetAdornerLayer(System.Windows.UIElement)">
+            <summary>
+            Calls <see cref="M:System.Windows.Documents.AdornerLayer.GetAdornerLayer(System.Windows.Media.Visual)"/> unless <paramref name="adornedElement"/> is a window
+            For window we fall back on finding the first <see cref="T:System.Windows.Documents.AdornerDecorator"/> and returning its <see cref="P:System.Windows.Documents.AdornerDecorator.AdornerLayer"/>.
+            </summary>
+            <param name="adornedElement">The adorned element.</param>
+            <returns>First AdornerLayer above given element, or null.</returns>
+        </member>
+        <member name="T:Gu.Wpf.Adorners.ContainerAdorner`1">
+            <summary>
+            Base class for adorners rendering content.
+            </summary>
+            <typeparam name="T">The type of visual to use for rendering content.</typeparam>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.ContainerAdorner`1.#ctor(System.Windows.UIElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Gu.Wpf.Adorners.ContainerAdorner`1"/> class.
+            </summary>
+            <param name="adornedElement">The <see cref="T:System.Windows.UIElement"/>.</param>
+        </member>
+        <member name="P:Gu.Wpf.Adorners.ContainerAdorner`1.Child">
+            <summary>
+            Gets or sets the visual that renders the content.
+            marked virtual because AddVisualChild calls the virtual OnVisualChildrenChanged.
+            </summary>
+        </member>
+        <member name="P:Gu.Wpf.Adorners.ContainerAdorner`1.VisualChildrenCount">
+            <inheritdoc />
+        </member>
+        <member name="P:Gu.Wpf.Adorners.ContainerAdorner`1.LogicalChildren">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.ContainerAdorner`1.ClearChild">
+            <summary>
+            Set child to null and remove it as visual and logical child.
+            </summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.ContainerAdorner`1.GetVisualChild(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="T:Gu.Wpf.Adorners.ContentAdorner">
+            <summary>
+            An <see cref="T:System.Windows.Documents.Adorner"/>.
+            </summary>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.ContentAdorner.ContentProperty">
+            <summary>Identifies the <see cref="P:Gu.Wpf.Adorners.ContentAdorner.Content"/> dependency property.</summary>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.ContentAdorner.ContentTemplateProperty">
+            <summary>Identifies the <see cref="P:Gu.Wpf.Adorners.ContentAdorner.ContentTemplate"/> dependency property.</summary>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.ContentAdorner.ContentTemplateSelectorProperty">
+            <summary>Identifies the <see cref="P:Gu.Wpf.Adorners.ContentAdorner.ContentTemplateSelector"/> dependency property.</summary>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.ContentAdorner.ContentPresenterStyleProperty">
+            <summary>Identifies the <see cref="P:Gu.Wpf.Adorners.ContentAdorner.ContentPresenterStyle"/> dependency property.</summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.ContentAdorner.#ctor(System.Windows.UIElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Gu.Wpf.Adorners.ContentAdorner"/> class.
+            </summary>
+            <param name="adornedElement">The <see cref="T:System.Windows.UIElement"/>.</param>
+        </member>
+        <member name="P:Gu.Wpf.Adorners.ContentAdorner.Child">
+            <inheritdoc />
+        </member>
+        <member name="P:Gu.Wpf.Adorners.ContentAdorner.Content">
+            <summary>
+            Gets or sets the content is the data used to generate the child elements of this control.
+            </summary>
+        </member>
+        <member name="P:Gu.Wpf.Adorners.ContentAdorner.ContentTemplate">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.DataTemplate"/> used to display the content of the control.
+            </summary>
+        </member>
+        <member name="P:Gu.Wpf.Adorners.ContentAdorner.ContentTemplateSelector">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.Controls.DataTemplateSelector"/> that allows the application writer to provide custom logic
+            for choosing the template used to display the content of the control.
+            </summary>
+            <remarks>
+            This property is ignored if <seealso cref="P:Gu.Wpf.Adorners.ContentAdorner.ContentTemplate"/> is set.
+            </remarks>
+        </member>
+        <member name="P:Gu.Wpf.Adorners.ContentAdorner.ContentPresenterStyle">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.Style"/> for <see cref="P:Gu.Wpf.Adorners.ContentAdorner.Child"/>.
+            </summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.ContentAdorner.MeasureOverride(System.Windows.Size)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.ContentAdorner.ArrangeOverride(System.Windows.Size)">
+            <inheritdoc />
+        </member>
+        <member name="T:Gu.Wpf.Adorners.ContentDragAdorner">
+            <summary>
+            An <see cref="T:System.Windows.Documents.Adorner"/> that renders content using a <see cref="T:System.Windows.Controls.ContentPresenter"/>.
+            </summary>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.ContentDragAdorner.ContentProperty">
+            <summary>Identifies the <see cref="P:Gu.Wpf.Adorners.ContentDragAdorner.Content"/> dependency property.</summary>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.ContentDragAdorner.ContentTemplateProperty">
+            <summary>Identifies the <see cref="P:Gu.Wpf.Adorners.ContentDragAdorner.ContentTemplate"/> dependency property.</summary>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.ContentDragAdorner.ContentTemplateSelectorProperty">
+            <summary>Identifies the <see cref="P:Gu.Wpf.Adorners.ContentDragAdorner.ContentTemplateSelector"/> dependency property.</summary>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.ContentDragAdorner.ContentPresenterStyleProperty">
+            <summary>Identifies the <see cref="P:Gu.Wpf.Adorners.ContentDragAdorner.ContentPresenterStyle"/> dependency property.</summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.ContentDragAdorner.#ctor(System.Windows.UIElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Gu.Wpf.Adorners.ContentDragAdorner"/> class.
+            </summary>
+            <param name="adornedElement">The <see cref="T:System.Windows.UIElement"/>.</param>
+        </member>
+        <member name="P:Gu.Wpf.Adorners.ContentDragAdorner.Content">
+            <summary>
+            Gets or sets the content is the data used to generate the child elements of this control.
+            </summary>
+        </member>
+        <member name="P:Gu.Wpf.Adorners.ContentDragAdorner.ContentTemplate">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.DataTemplate"/> used to display the content of the control.
+            </summary>
+        </member>
+        <member name="P:Gu.Wpf.Adorners.ContentDragAdorner.ContentTemplateSelector">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.Controls.DataTemplateSelector"/> that allows the application writer to provide custom logic
+            for choosing the template used to display the content of the control.
+            </summary>
+            <remarks>
+            This property is ignored if <seealso cref="P:Gu.Wpf.Adorners.ContentDragAdorner.ContentTemplate"/> is set.
+            </remarks>
+        </member>
+        <member name="P:Gu.Wpf.Adorners.ContentDragAdorner.ContentPresenterStyle">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.Style"/> for the <see cref="T:System.Windows.Controls.ContentPresenter"/>.
+            </summary>
+        </member>
+        <member name="T:Gu.Wpf.Adorners.DataObjectExt">
+            <summary>
+            Extension methods for <see cref="T:System.Windows.IDataObject"/>.
+            </summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DataObjectExt.GetData``1(System.Windows.IDataObject)">
+            <summary>
+            Calls return (T)dataObject.GetData(typeof(T));.
+            </summary>
+            <typeparam name="T">The type of the key and the data.</typeparam>
+            <param name="dataObject">The <see cref="T:System.Windows.IDataObject"/>.</param>
+            <returns>The value returned by <see cref="M:System.Windows.IDataObject.GetData(System.Type)"/>.</returns>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DataObjectExt.TryGetData``1(System.Windows.IDataObject,``0@)">
+            <summary>
+            Calls return (T)dataObject.GetData(typeof(T));.
+            </summary>
+            <typeparam name="T">The type of the key and the data.</typeparam>
+            <param name="dataObject">The <see cref="T:System.Windows.IDataObject"/>.</param>
+            <param name="data">The data keyed by <typeparamref name="T"/>.</param>
+            <returns>True if <see cref="M:System.Windows.IDataObject.GetData(System.Type)"/> returns not null.</returns>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DataObjectExt.SetData``1(System.Windows.IDataObject,``0)">
+            <summary>
+            Calls dataObject.SetData(typeof(T), data);.
+            </summary>
+            <typeparam name="T">The type to key the data with.</typeparam>
+            <param name="dataObject">The <see cref="T:System.Windows.IDataObject"/>.</param>
+            <param name="data">The value to set.</param>
+        </member>
+        <member name="T:Gu.Wpf.Adorners.DragAdorner">
+            <summary>
+            Helper for showing drag adorners.
+            </summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DragAdorner.Create(System.Windows.UIElement,System.Object,System.Windows.DataTemplate,System.Windows.Controls.DataTemplateSelector)">
+            <summary>
+            Create a <see cref="T:Gu.Wpf.Adorners.ContentDragAdorner"/> that renders a <see cref="T:System.Windows.Controls.ContentPresenter"/>.
+            The adorner is added to the adorner layer before it is returned.
+            </summary>
+            <param name="adornedElement">The drag source.</param>
+            <param name="content">The content to drag.</param>
+            <param name="contentTemplate">The template for the dragged content.</param>
+            <param name="contentTemplateSelector">The template selector for the dragged content.</param>
+            <returns>
+            A <see cref="T:Gu.Wpf.Adorners.ContentDragAdorner"/> that should be disposed when the drag operation ends.
+            Disposing it removes subscriptions and removes the adorner.
+            </returns>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DragAdorner.Create(System.Windows.Controls.ContentPresenter)">
+            <summary>
+            Create a <see cref="T:Gu.Wpf.Adorners.ContentDragAdorner"/> that renders a <see cref="T:System.Windows.Controls.ContentPresenter"/> with Content, ContentTemplate and ContentTemplateSelector from <paramref name="adornedElement"/>.
+            </summary>
+            <param name="adornedElement">The drag source.</param>
+            <returns>
+            A <see cref="T:Gu.Wpf.Adorners.ContentDragAdorner"/> that should be disposed when the drag operation ends.
+            Disposing it removes subscriptions and removes the adorner.
+            </returns>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DragAdorner.CreateVisualBrushAdorner(System.Windows.FrameworkElement)">
+            <summary>
+            Create a <see cref="T:Gu.Wpf.Adorners.VisualBrushDragAdorner"/> that renders a rectangle with fills set to a visual brush of the adorned element.
+            </summary>
+            <param name="adornedElement">The drag source.</param>
+            <returns>
+            A <see cref="T:Gu.Wpf.Adorners.VisualBrushDragAdorner"/> that should be disposed when the drag operation ends.
+            Disposing it removes subscriptions and removes the adorner.
+            </returns>
+        </member>
+        <member name="T:Gu.Wpf.Adorners.DragAdorner`1">
+            <summary>
+            A base class for drag adorners.
+            </summary>
+            <typeparam name="T">The type of the content.</typeparam>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.DragAdorner`1.DropTargetProperty">
+            <summary>Identifies the <see cref="P:Gu.Wpf.Adorners.DragAdorner`1.DropTarget"/> dependency property.</summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DragAdorner`1.#ctor(System.Windows.UIElement,`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Gu.Wpf.Adorners.DragAdorner`1"/> class.
+            </summary>
+            <param name="adornedElement">The drag source.</param>
+            <param name="child">The content to render.</param>
+        </member>
+        <member name="P:Gu.Wpf.Adorners.DragAdorner`1.Offset">
+            <summary>
+            Gets a transform that specifies the offset for the position.
+            By default the adorner is positioned so that the mouse is glued to the position where the drag started.
+            </summary>
+        </member>
+        <member name="P:Gu.Wpf.Adorners.DragAdorner`1.DropTarget">
+            <summary>
+            Gets or sets the drop target to snap position to.
+            </summary>
+        </member>
+        <member name="P:Gu.Wpf.Adorners.DragAdorner`1.Child">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DragAdorner`1.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DragAdorner`1.SnapTo(System.Windows.UIElement)">
+            <summary>
+            Set <see cref="P:Gu.Wpf.Adorners.DragAdorner`1.DropTarget"/> to <paramref name="dropTarget"/> and update the position.
+            Provides a visual hint that the item can be dropped.
+            </summary>
+            <param name="dropTarget">The drop target to snap position to.</param>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DragAdorner`1.RemoveSnap">
+            <summary>
+            Set <see cref="P:Gu.Wpf.Adorners.DragAdorner`1.DropTarget"/> to null and start following mouse cursor again.
+            </summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DragAdorner`1.RemoveSnap(System.Windows.UIElement)">
+            <summary>
+            Set <see cref="P:Gu.Wpf.Adorners.DragAdorner`1.DropTarget"/> to null if <see cref="P:Gu.Wpf.Adorners.DragAdorner`1.DropTarget"/> is the same instance as <paramref name="dropTarget"/> and start following mouse cursor again.
+            </summary>
+            <param name="dropTarget">The drop target to stop snapping position to.</param>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DragAdorner`1.OnDropTargetChanged(System.Windows.UIElement,System.Windows.UIElement)">
+            <summary>This method is invoked when the <see cref="F:Gu.Wpf.Adorners.DragAdorner`1.DropTargetProperty"/> changes.</summary>
+            <param name="oldValue">The old value of <see cref="F:Gu.Wpf.Adorners.DragAdorner`1.DropTargetProperty"/>.</param>
+            <param name="newValue">The new value of <see cref="F:Gu.Wpf.Adorners.DragAdorner`1.DropTargetProperty"/>.</param>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DragAdorner`1.Dispose(System.Boolean)">
+            <summary>
+            Called by <see cref="M:Gu.Wpf.Adorners.DragAdorner`1.Dispose"/>.
+            </summary>
+            <param name="disposing">True if called by <see cref="M:Gu.Wpf.Adorners.DragAdorner`1.Dispose"/>, false if called by finalizer.</param>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DragAdorner`1.MeasureOverride(System.Windows.Size)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DragAdorner`1.ArrangeOverride(System.Windows.Size)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DragAdorner`1.ThrowIfDisposed">
+            <summary>
+            Throws <see cref="T:System.ObjectDisposedException"/> if this instance is disposed.
+            </summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DragAdorner`1.UpdatePosition">
+            <summary>
+            Update the position of the adorner. This is called when QueryContinueDrag is raised or DropTarget changes.
+            </summary>
+        </member>
+        <member name="T:Gu.Wpf.Adorners.Info">
+            <summary>
+            For showing adorners similar to validation errors.
+            </summary>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.Info.TemplateProperty">
+            <summary>
+            Template used to generate info feedback on the AdornerLayer.
+            </summary>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.Info.VisibilityProperty">
+            <summary>
+            Gets or sets visibility of the adorner.
+            Note that setting it to visible does not need to mean it will be rendered. This can happen if the adorned element is collapsed for example.
+            </summary>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.Info.IsVisibleProperty">
+            <summary>
+            Gets or sets if the adorner is currently visible.
+            </summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.Info.SetTemplate(System.Windows.DependencyObject,System.Windows.Controls.ControlTemplate)">
+            <summary>Helper for setting <see cref="F:Gu.Wpf.Adorners.Info.TemplateProperty"/> on <paramref name="element"/>.</summary>
+            <param name="element"><see cref="T:System.Windows.DependencyObject"/> to set <see cref="F:Gu.Wpf.Adorners.Info.TemplateProperty"/> on.</param>
+            <param name="value">Template property value.</param>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.Info.GetTemplate(System.Windows.DependencyObject)">
+            <summary>Helper for getting <see cref="F:Gu.Wpf.Adorners.Info.TemplateProperty"/> from <paramref name="element"/>.</summary>
+            <param name="element"><see cref="T:System.Windows.DependencyObject"/> to read <see cref="F:Gu.Wpf.Adorners.Info.TemplateProperty"/> from.</param>
+            <returns>Template property value.</returns>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.Info.SetVisibility(System.Windows.DependencyObject,System.Windows.Visibility)">
+            <summary>Helper for setting <see cref="F:Gu.Wpf.Adorners.Info.VisibilityProperty"/> on <paramref name="element"/>.</summary>
+            <param name="element"><see cref="T:System.Windows.DependencyObject"/> to set <see cref="F:Gu.Wpf.Adorners.Info.VisibilityProperty"/> on.</param>
+            <param name="value">Visibility property value.</param>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.Info.GetVisibility(System.Windows.DependencyObject)">
+            <summary>Helper for getting <see cref="F:Gu.Wpf.Adorners.Info.VisibilityProperty"/> from <paramref name="element"/>.</summary>
+            <param name="element"><see cref="T:System.Windows.DependencyObject"/> to read <see cref="F:Gu.Wpf.Adorners.Info.VisibilityProperty"/> from.</param>
+            <returns>Visibility property value.</returns>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.Info.GetIsVisible(System.Windows.DependencyObject)">
+            <summary>Helper for getting <see cref="F:Gu.Wpf.Adorners.Info.IsVisibleProperty"/> from <paramref name="element"/>.</summary>
+            <param name="element"><see cref="T:System.Windows.DependencyObject"/> to read <see cref="F:Gu.Wpf.Adorners.Info.IsVisibleProperty"/> from.</param>
+            <returns>IsVisible property value.</returns>
+        </member>
+        <member name="T:Gu.Wpf.Adorners.DependencyObjectHelper">
+            <summary>
+            https://social.msdn.microsoft.com/Forums/vstudio/en-US/580234cb-e870-4af1-9a91-3e3ba118c89c/getting-list-of-all-dependencyattached-properties-of-an-object?forum=wpf.
+            </summary>
+        </member>
+        <member name="T:Gu.Wpf.Adorners.DoubleUtil">
+            <summary>
+            ~Inspired~ by: http://referencesource.microsoft.com/#WindowsBase/Shared/MS/Internal/DoubleUtil.cs,ef2a956bcf846761.
+            </summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DoubleUtil.AreClose(System.Double,System.Double)">
+            <summary>
+            AreClose - Returns whether or not two doubles are "close".  That is, whether or
+            not they are within epsilon of each other.  Note that this epsilon is proportional
+            to the numbers themselves to that AreClose survives scalar multiplication.
+            There are plenty of ways for this to return false even for numbers which
+            are theoretically identical, so no code calling this should fail to work if this
+            returns false.  This is important enough to repeat:
+            NB: NO CODE CALLING THIS FUNCTION SHOULD DEPEND ON ACCURATE RESULTS - this should be
+            used for optimizations *only*.
+            </summary>
+            <returns>
+            bool - the result of the AreClose comparison.
+            </returns>
+            <param name="value1"> The first double to compare. </param>
+            <param name="value2"> The second double to compare. </param>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DoubleUtil.LessThan(System.Double,System.Double)">
+            <summary>
+            LessThan - Returns whether or not the first double is less than the second double.
+            That is, whether or not the first is strictly less than *and* not within epsilon of
+            the other number.  Note that this epsilon is proportional to the numbers themselves
+            to that AreClose survives scalar multiplication.  Note,
+            There are plenty of ways for this to return false even for numbers which
+            are theoretically identical, so no code calling this should fail to work if this
+            returns false.  This is important enough to repeat:
+            NB: NO CODE CALLING THIS FUNCTION SHOULD DEPEND ON ACCURATE RESULTS - this should be
+            used for optimizations *only*.
+            </summary>
+            <returns>
+            bool - the result of the LessThan comparison.
+            </returns>
+            <param name="value1"> The first double to compare. </param>
+            <param name="value2"> The second double to compare. </param>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DoubleUtil.GreaterThan(System.Double,System.Double)">
+            <summary>
+            GreaterThan - Returns whether or not the first double is greater than the second double.
+            That is, whether or not the first is strictly greater than *and* not within epsilon of
+            the other number.  Note that this epsilon is proportional to the numbers themselves
+            to that AreClose survives scalar multiplication.  Note,
+            There are plenty of ways for this to return false even for numbers which
+            are theoretically identical, so no code calling this should fail to work if this
+            returns false.  This is important enough to repeat:
+            NB: NO CODE CALLING THIS FUNCTION SHOULD DEPEND ON ACCURATE RESULTS - this should be
+            used for optimizations *only*.
+            </summary>
+            <returns>
+            bool - the result of the GreaterThan comparison.
+            </returns>
+            <param name="value1"> The first double to compare. </param>
+            <param name="value2"> The second double to compare. </param>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DoubleUtil.LessThanOrClose(System.Double,System.Double)">
+            <summary>
+            LessThanOrClose - Returns whether or not the first double is less than or close to
+            the second double.  That is, whether or not the first is strictly less than or within
+            epsilon of the other number.  Note that this epsilon is proportional to the numbers
+            themselves to that AreClose survives scalar multiplication.  Note,
+            There are plenty of ways for this to return false even for numbers which
+            are theoretically identical, so no code calling this should fail to work if this
+            returns false.  This is important enough to repeat:
+            NB: NO CODE CALLING THIS FUNCTION SHOULD DEPEND ON ACCURATE RESULTS - this should be
+            used for optimizations *only*.
+            </summary>
+            <returns>
+            bool - the result of the LessThanOrClose comparison.
+            </returns>
+            <param name="value1"> The first double to compare. </param>
+            <param name="value2"> The second double to compare. </param>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DoubleUtil.GreaterThanOrClose(System.Double,System.Double)">
+            <summary>
+            GreaterThanOrClose - Returns whether or not the first double is greater than or close to
+            the second double.  That is, whether or not the first is strictly greater than or within
+            epsilon of the other number.  Note that this epsilon is proportional to the numbers
+            themselves to that AreClose survives scalar multiplication.  Note,
+            There are plenty of ways for this to return false even for numbers which
+            are theoretically identical, so no code calling this should fail to work if this
+            returns false.  This is important enough to repeat:
+            NB: NO CODE CALLING THIS FUNCTION SHOULD DEPEND ON ACCURATE RESULTS - this should be
+            used for optimizations *only*.
+            </summary>
+            <returns>
+            bool - the result of the GreaterThanOrClose comparison.
+            </returns>
+            <param name="value1"> The first double to compare. </param>
+            <param name="value2"> The second double to compare. </param>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DoubleUtil.IsOne(System.Double)">
+            <summary>
+            IsOne - Returns whether or not the double is "close" to 1.  Same as AreClose(double, 1),
+            but this is faster.
+            </summary>
+            <returns>
+            bool - the result of the AreClose comparison.
+            </returns>
+            <param name="value"> The double to compare to 1. </param>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DoubleUtil.IsZero(System.Double)">
+            <summary>
+            IsZero - Returns whether or not the double is "close" to 0.  Same as AreClose(double, 0),
+            but this is faster.
+            </summary>
+            <returns>
+            bool - the result of the AreClose comparison.
+            </returns>
+            <param name="value"> The double to compare to 0. </param>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DoubleUtil.AreClose(System.Windows.Point,System.Windows.Point)">
+            <summary>
+            Compares two points for fuzzy equality.  This function
+            helps compensate for the fact that double values can
+            acquire error when operated upon.
+            </summary>
+            <param name='point1'>The first point to compare.</param>
+            <param name='point2'>The second point to compare.</param>
+            <returns>Whether or not the two points are equal.</returns>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DoubleUtil.AreClose(System.Windows.Size,System.Windows.Size)">
+            <summary>
+            Compares two Size instances for fuzzy equality.  This function
+            helps compensate for the fact that double values can
+            acquire error when operated upon.
+            </summary>
+            <param name='size1'>The first size to compare.</param>
+            <param name='size2'>The second size to compare.</param>
+            <returns>Whether or not the two Size instances are equal.</returns>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DoubleUtil.AreClose(System.Windows.Vector,System.Windows.Vector)">
+            <summary>
+            Compares two Vector instances for fuzzy equality.  This function
+            helps compensate for the fact that double values can
+            acquire error when operated upon.
+            </summary>
+            <param name='vector1'>The first Vector to compare.</param>
+            <param name='vector2'>The second Vector to compare.</param>
+            <returns>Whether or not the two Vector instances are equal.</returns>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DoubleUtil.AreClose(System.Windows.Rect,System.Windows.Rect)">
+            <summary>
+            Compares two rectangles for fuzzy equality.  This function
+            helps compensate for the fact that double values can
+            acquire error when operated upon.
+            </summary>
+            <param name='rect1'>The first rectangle to compare.</param>
+            <param name='rect2'>The second rectangle to compare.</param>
+            <returns>Whether or not the two rectangles are equal.</returns>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.DoubleUtil.RectHasNaN(System.Windows.Rect)">
+            <summary>
+            rectHasNaN - this returns true if this rect has X, Y , Height or Width as NaN.
+            </summary>
+            <param name='r'>The rectangle to test.</param>
+            <returns>returns whether the Rect has NaN.</returns>
+        </member>
+        <member name="T:Gu.Wpf.Adorners.EmptyEnumerator">
+            <summary>
+            Returns an Enumerator that enumerates over nothing.
+            </summary>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.EmptyEnumerator.Instance">
+            <summary>
+            Read-Only instance of an Empty Enumerator.
+            </summary>
+        </member>
+        <member name="P:Gu.Wpf.Adorners.EmptyEnumerator.System#Collections#IEnumerator#Current">
+            <summary>
+            Gets throws <see cref="T:System.InvalidOperationException"/>.
+            </summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.EmptyEnumerator.Reset">
+            <summary>
+            Does nothing.
+            </summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.EmptyEnumerator.MoveNext">
+            <summary>
+            Returns false.
+            </summary>
+            <returns>false.</returns>
+        </member>
+        <member name="T:Gu.Wpf.Adorners.GotKeyboardFocusEventManager">
+            <summary>
+            Manager for the DependencyObject.GotKeyboardFocus event.
+            </summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.GotKeyboardFocusEventManager.NewListenerList">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.GotKeyboardFocusEventManager.StartListening(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.GotKeyboardFocusEventManager.StopListening(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.IsKeyboardFocusWithinChangedEventManager.NewListenerList">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.IsKeyboardFocusWithinChangedEventManager.StartListening(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.IsKeyboardFocusWithinChangedEventManager.StopListening(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="T:Gu.Wpf.Adorners.IsVisibleChangedEventManager">
+            <summary>
+            Manager for the UIElement.IsVisibleChanged event.
+            </summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.IsVisibleChangedEventManager.NewListenerList">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.IsVisibleChangedEventManager.StartListening(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.IsVisibleChangedEventManager.StopListening(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="T:Gu.Wpf.Adorners.LoadedEventManager">
+            <summary>
+            Manager for the DependencyObject.Loaded event.
+            </summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.LoadedEventManager.NewListenerList">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.LoadedEventManager.StartListening(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.LoadedEventManager.StopListening(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="T:Gu.Wpf.Adorners.LostKeyboardFocusEventManager">
+            <summary>
+            Manager for the DependencyObject.LostKeyboardFocus event.
+            </summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.LostKeyboardFocusEventManager.NewListenerList">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.LostKeyboardFocusEventManager.StartListening(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.LostKeyboardFocusEventManager.StopListening(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="T:Gu.Wpf.Adorners.PasswordChangedEventManager">
+            <summary>
+            Manager for the PasswordBox.PasswordChanged event.
+            </summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.PasswordChangedEventManager.NewListenerList">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.PasswordChangedEventManager.StartListening(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.PasswordChangedEventManager.StopListening(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="T:Gu.Wpf.Adorners.SelectionChangedEventManager">
+            <summary>
+            Manager for the ComboBox.SelectionChanged event.
+            </summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.SelectionChangedEventManager.NewListenerList">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.SelectionChangedEventManager.StartListening(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.SelectionChangedEventManager.StopListening(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="T:Gu.Wpf.Adorners.SizeChangedEventManager">
+            <summary>
+            Manager for the DependencyObject.SizeChanged event.
+            </summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.SizeChangedEventManager.NewListenerList">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.SizeChangedEventManager.StartListening(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.SizeChangedEventManager.StopListening(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="T:Gu.Wpf.Adorners.TextChangedEventManager">
+            <summary>
+            Manager for the TextBoxBase.TextChanged event.
+            </summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.TextChangedEventManager.NewListenerList">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.TextChangedEventManager.StartListening(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.TextChangedEventManager.StopListening(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="T:Gu.Wpf.Adorners.TextInputEventManager">
+            <summary>
+            Manager for the DependencyObject.TextInput event.
+            </summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.TextInputEventManager.NewListenerList">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.TextInputEventManager.StartListening(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.TextInputEventManager.StopListening(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="T:Gu.Wpf.Adorners.UnloadedEventManager">
+            <summary>
+            Manager for the DependencyObject.Unloaded event.
+            </summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.UnloadedEventManager.NewListenerList">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.UnloadedEventManager.StartListening(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.UnloadedEventManager.StopListening(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="T:Gu.Wpf.Adorners.Overlay">
+            <summary>
+            Attached properties for creating overlays.
+            </summary>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.Overlay.ContentProperty">
+            <summary>
+            Gets or sets the content is the data used to generate the child elements of this control.
+            </summary>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.Overlay.ContentTemplateProperty">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.DataTemplate"/> used to display the content of the control.
+            </summary>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.Overlay.ContentTemplateSelectorProperty">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.Controls.DataTemplateSelector"/> that allows the application writer to provide custom logic
+            for choosing the template used to display the content of the control.
+            </summary>
+            <remarks>
+            This property is ignored if <seealso cref="F:Gu.Wpf.Adorners.Overlay.ContentTemplateProperty"/> is set.
+            </remarks>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.Overlay.ContentPresenterStyleProperty">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.Style"/> for rendering <see cref="F:Gu.Wpf.Adorners.Overlay.ContentProperty"/>.
+            </summary>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.Overlay.VisibilityProperty">
+            <summary>
+            Gets or sets visibility of the adorner. Note that setting it to visible does not need to trigger a show.
+            </summary>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.Overlay.IsVisibleProperty">
+            <summary>
+            Gets or sets if the adorner is currently visible.
+            </summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.Overlay.SetContent(System.Windows.FrameworkElement,System.Object)">
+            <summary>Helper for setting <see cref="F:Gu.Wpf.Adorners.Overlay.ContentProperty"/> on <paramref name="element"/>.</summary>
+            <param name="element"><see cref="T:System.Windows.FrameworkElement"/> to set <see cref="F:Gu.Wpf.Adorners.Overlay.ContentProperty"/> on.</param>
+            <param name="value">Content property value.</param>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.Overlay.GetContent(System.Windows.FrameworkElement)">
+            <summary>Helper for getting <see cref="F:Gu.Wpf.Adorners.Overlay.ContentProperty"/> from <paramref name="element"/>.</summary>
+            <param name="element"><see cref="T:System.Windows.FrameworkElement"/> to read <see cref="F:Gu.Wpf.Adorners.Overlay.ContentProperty"/> from.</param>
+            <returns>Content property value.</returns>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.Overlay.SetContentTemplate(System.Windows.FrameworkElement,System.Windows.DataTemplate)">
+            <summary>Helper for setting <see cref="F:Gu.Wpf.Adorners.Overlay.ContentTemplateProperty"/> on <paramref name="element"/>.</summary>
+            <param name="element"><see cref="T:System.Windows.FrameworkElement"/> to set <see cref="F:Gu.Wpf.Adorners.Overlay.ContentTemplateProperty"/> on.</param>
+            <param name="value">ContentTemplate property value.</param>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.Overlay.GetContentTemplate(System.Windows.FrameworkElement)">
+            <summary>Helper for getting <see cref="F:Gu.Wpf.Adorners.Overlay.ContentTemplateProperty"/> from <paramref name="element"/>.</summary>
+            <param name="element"><see cref="T:System.Windows.FrameworkElement"/> to read <see cref="F:Gu.Wpf.Adorners.Overlay.ContentTemplateProperty"/> from.</param>
+            <returns>ContentTemplate property value.</returns>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.Overlay.SetContentTemplateSelector(System.Windows.FrameworkElement,System.Windows.Controls.DataTemplateSelector)">
+            <summary>Helper for setting <see cref="F:Gu.Wpf.Adorners.Overlay.ContentTemplateSelectorProperty"/> on <paramref name="element"/>.</summary>
+            <param name="element"><see cref="T:System.Windows.FrameworkElement"/> to set <see cref="F:Gu.Wpf.Adorners.Overlay.ContentTemplateSelectorProperty"/> on.</param>
+            <param name="value">ContentTemplateSelector property value.</param>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.Overlay.GetContentTemplateSelector(System.Windows.FrameworkElement)">
+            <summary>Helper for getting <see cref="F:Gu.Wpf.Adorners.Overlay.ContentTemplateSelectorProperty"/> from <paramref name="element"/>.</summary>
+            <param name="element"><see cref="T:System.Windows.FrameworkElement"/> to read <see cref="F:Gu.Wpf.Adorners.Overlay.ContentTemplateSelectorProperty"/> from.</param>
+            <returns>ContentTemplateSelector property value.</returns>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.Overlay.SetContentPresenterStyle(System.Windows.FrameworkElement,System.Windows.Style)">
+            <summary>Helper for setting <see cref="F:Gu.Wpf.Adorners.Overlay.ContentPresenterStyleProperty"/> on <paramref name="element"/>.</summary>
+            <param name="element"><see cref="T:System.Windows.FrameworkElement"/> to set <see cref="F:Gu.Wpf.Adorners.Overlay.ContentPresenterStyleProperty"/> on.</param>
+            <param name="value">ContentPresenterStyle property value.</param>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.Overlay.GetContentPresenterStyle(System.Windows.FrameworkElement)">
+            <summary>Helper for getting <see cref="F:Gu.Wpf.Adorners.Overlay.ContentPresenterStyleProperty"/> from <paramref name="element"/>.</summary>
+            <param name="element"><see cref="T:System.Windows.FrameworkElement"/> to read <see cref="F:Gu.Wpf.Adorners.Overlay.ContentPresenterStyleProperty"/> from.</param>
+            <returns>ContentPresenterStyle property value.</returns>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.Overlay.SetVisibility(System.Windows.FrameworkElement,System.Windows.Visibility)">
+            <summary>Helper for setting <see cref="F:Gu.Wpf.Adorners.Overlay.VisibilityProperty"/> on <paramref name="element"/>.</summary>
+            <param name="element"><see cref="T:System.Windows.FrameworkElement"/> to set <see cref="F:Gu.Wpf.Adorners.Overlay.VisibilityProperty"/> on.</param>
+            <param name="value">Visibility property value.</param>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.Overlay.GetVisibility(System.Windows.FrameworkElement)">
+            <summary>Helper for getting <see cref="F:Gu.Wpf.Adorners.Overlay.VisibilityProperty"/> from <paramref name="element"/>.</summary>
+            <param name="element"><see cref="T:System.Windows.FrameworkElement"/> to read <see cref="F:Gu.Wpf.Adorners.Overlay.VisibilityProperty"/> from.</param>
+            <returns>Visibility property value.</returns>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.Overlay.GetIsVisible(System.Windows.FrameworkElement)">
+            <summary>Helper for getting <see cref="F:Gu.Wpf.Adorners.Overlay.IsVisibleProperty"/> from <paramref name="element"/>.</summary>
+            <param name="element"><see cref="T:System.Windows.FrameworkElement"/> to read <see cref="F:Gu.Wpf.Adorners.Overlay.IsVisibleProperty"/> from.</param>
+            <returns>IsVisible property value.</returns>
+        </member>
+        <member name="T:Gu.Wpf.Adorners.VisualBrushDragAdorner">
+            <summary>
+            A drag adorner that renders a rectangle with the visual brush of the adorned element.
+            </summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.VisualBrushDragAdorner.#ctor(System.Windows.UIElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Gu.Wpf.Adorners.VisualBrushDragAdorner"/> class.
+            </summary>
+            <param name="adornedElement">The drag source.</param>
+        </member>
+        <member name="T:Gu.Wpf.Adorners.Watermark">
+            <summary>
+            Attached properties for showing watermarks.
+            </summary>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.Watermark.TextProperty">
+            <summary>
+            The watermark text.
+            </summary>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.Watermark.VisibleWhenProperty">
+            <summary>
+            Controls visibility of the adorner, default is WatermarkVisibleWhen.EmptyAndNotKeyboardFocused.
+            </summary>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.Watermark.TextStyleProperty">
+            <summary>
+            The style for the <see cref="T:System.Windows.Controls.TextBlock"/> rendering <see cref="F:Gu.Wpf.Adorners.Watermark.TextProperty"/>.
+            </summary>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.Watermark.IsVisibleProperty">
+            <summary>
+            Gets or sets if the adorner is currently visible.
+            </summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.Watermark.SetText(System.Windows.UIElement,System.String)">
+            <summary>Helper for setting <see cref="F:Gu.Wpf.Adorners.Watermark.TextProperty"/> on <paramref name="element"/>.</summary>
+            <param name="element"><see cref="T:System.Windows.UIElement"/> to set <see cref="F:Gu.Wpf.Adorners.Watermark.TextProperty"/> on.</param>
+            <param name="value">Text property value.</param>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.Watermark.GetText(System.Windows.UIElement)">
+            <summary>Helper for getting <see cref="F:Gu.Wpf.Adorners.Watermark.TextProperty"/> from <paramref name="element"/>.</summary>
+            <param name="element"><see cref="T:System.Windows.UIElement"/> to read <see cref="F:Gu.Wpf.Adorners.Watermark.TextProperty"/> from.</param>
+            <returns>Text property value.</returns>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.Watermark.SetVisibleWhen(System.Windows.UIElement,Gu.Wpf.Adorners.WatermarkVisibleWhen)">
+            <summary>Helper for setting <see cref="F:Gu.Wpf.Adorners.Watermark.VisibleWhenProperty"/> on <paramref name="element"/>.</summary>
+            <param name="element"><see cref="T:System.Windows.UIElement"/> to set <see cref="F:Gu.Wpf.Adorners.Watermark.VisibleWhenProperty"/> on.</param>
+            <param name="value">VisibleWhen property value.</param>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.Watermark.GetVisibleWhen(System.Windows.UIElement)">
+            <summary>Helper for getting <see cref="F:Gu.Wpf.Adorners.Watermark.VisibleWhenProperty"/> from <paramref name="element"/>.</summary>
+            <param name="element"><see cref="T:System.Windows.UIElement"/> to read <see cref="F:Gu.Wpf.Adorners.Watermark.VisibleWhenProperty"/> from.</param>
+            <returns>VisibleWhen property value.</returns>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.Watermark.SetTextStyle(System.Windows.UIElement,System.Windows.Style)">
+            <summary>Helper for setting <see cref="F:Gu.Wpf.Adorners.Watermark.TextStyleProperty"/> on <paramref name="element"/>.</summary>
+            <param name="element"><see cref="T:System.Windows.UIElement"/> to set <see cref="F:Gu.Wpf.Adorners.Watermark.TextStyleProperty"/> on.</param>
+            <param name="value">TextStyle property value.</param>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.Watermark.GetTextStyle(System.Windows.UIElement)">
+            <summary>Helper for getting <see cref="F:Gu.Wpf.Adorners.Watermark.TextStyleProperty"/> from <paramref name="element"/>.</summary>
+            <param name="element"><see cref="T:System.Windows.UIElement"/> to read <see cref="F:Gu.Wpf.Adorners.Watermark.TextStyleProperty"/> from.</param>
+            <returns>TextStyle property value.</returns>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.Watermark.GetIsVisible(System.Windows.Controls.Control)">
+            <summary>Helper for getting <see cref="F:Gu.Wpf.Adorners.Watermark.IsVisibleProperty"/> from <paramref name="element"/>.</summary>
+            <param name="element"><see cref="T:System.Windows.Controls.Control"/> to read <see cref="F:Gu.Wpf.Adorners.Watermark.IsVisibleProperty"/> from.</param>
+            <returns>IsVisible property value.</returns>
+        </member>
+        <member name="T:Gu.Wpf.Adorners.WatermarkAdorner">
+            <summary>
+            Adorner that shows watermark text.
+            </summary>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.WatermarkAdorner.TextStyleProperty">
+            <summary>Identifies the <see cref="P:Gu.Wpf.Adorners.WatermarkAdorner.TextStyle"/> dependency property.</summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.WatermarkAdorner.#ctor(System.Windows.Controls.Control)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Gu.Wpf.Adorners.WatermarkAdorner"/> class.
+            </summary>
+            <param name="adornedElement">The adorned element.</param>
+        </member>
+        <member name="P:Gu.Wpf.Adorners.WatermarkAdorner.TextStyle">
+            <summary>
+            Gets or sets the style for the <see cref="T:System.Windows.Controls.TextBlock"/> rendering <see cref="F:Gu.Wpf.Adorners.Watermark.TextProperty"/> for <see cref="P:System.Windows.Documents.Adorner.AdornedElement"/>.
+            </summary>
+        </member>
+        <member name="M:Gu.Wpf.Adorners.WatermarkAdorner.MeasureOverride(System.Windows.Size)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gu.Wpf.Adorners.WatermarkAdorner.ArrangeOverride(System.Windows.Size)">
+            <inheritdoc />
+        </member>
+        <member name="T:Gu.Wpf.Adorners.WatermarkVisibleWhen">
+            <summary>
+            For specifying how visibility of a <see cref="T:Gu.Wpf.Adorners.WatermarkAdorner"/> behaves.
+            </summary>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.WatermarkVisibleWhen.Empty">
+            <summary>
+            Shows the watermark as long as the <see cref="T:System.Windows.Controls.TextBox"/> is empty.
+            </summary>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.WatermarkVisibleWhen.EmptyAndNotKeyboardFocused">
+            <summary>
+             Shows the watermark as long as the <see cref="T:System.Windows.Controls.TextBox"/> is empty and not focused.
+            </summary>
+        </member>
+        <member name="F:Gu.Wpf.Adorners.WatermarkVisibleWhen.Never">
+            <summary>
+             Don't show the watermark.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.AllowNullAttribute">
+            <summary>Specifies that null is allowed as an input even if the corresponding type disallows it.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DisallowNullAttribute">
+            <summary>Specifies that null is disallowed as an input even if the corresponding type allows it.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MaybeNullAttribute">
+            <summary>Specifies that an output may be null even if the corresponding type disallows it.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.NotNullAttribute">
+            <summary>Specifies that an output will not be null even if the corresponding type allows it.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute">
+            <summary>Specifies that when a method returns <see cref="P:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.ReturnValue"/>, the parameter may be null even if the corresponding type disallows it.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.#ctor(System.Boolean)">
+            <summary>Initializes the attribute with the specified return value condition.</summary>
+            <param name="returnValue">
+            The return value condition. If the method returns this value, the associated parameter may be null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.ReturnValue">
+            <summary>Gets the return value condition.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute">
+            <summary>Specifies that when a method returns <see cref="P:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.ReturnValue"/>, the parameter will not be null even if the corresponding type allows it.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.#ctor(System.Boolean)">
+            <summary>Initializes the attribute with the specified return value condition.</summary>
+            <param name="returnValue">
+            The return value condition. If the method returns this value, the associated parameter will not be null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.ReturnValue">
+            <summary>Gets the return value condition.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute">
+            <summary>Specifies that the output will be non-null if the named parameter is non-null.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.#ctor(System.String)">
+            <summary>Initializes the attribute with the associated parameter name.</summary>
+            <param name="parameterName">
+            The associated parameter name.  The output will be non-null if the argument to the parameter specified is non-null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.ParameterName">
+            <summary>Gets the associated parameter name.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute">
+            <summary>Applied to a method that will never return under any circumstance.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute">
+            <summary>Specifies that the method will not return if the associated Boolean parameter is passed the specified value.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.#ctor(System.Boolean)">
+            <summary>Initializes the attribute with the specified parameter value.</summary>
+            <param name="parameterValue">
+            The condition parameter value. Code after the method will be considered unreachable by diagnostics if the argument to
+            the associated parameter matches this value.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.ParameterValue">
+            <summary>Gets the condition parameter value.</summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,18 @@
+﻿<Window x:Class="AutofacIoCSample.Windows.UserDefineMessageBoxWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutofacIoCSample.Windows"
+        mc:Ignorable="d"
+        Title="用户自定义弹窗" Height="150" Width="250" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" ShowInTaskbar="False">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <TextBox Name="MsgTextTextBox" BorderThickness="0" IsReadOnly="True" HorizontalAlignment="Center" 
+                 VerticalAlignment="Center" AcceptsReturn="True" TextWrapping="Wrap" />
+        <Button Name="OkButton" Grid.Row="1" Width="50" Height="25" Click="OkButton_Click">确定</Button>
+    </Grid>
+</Window>

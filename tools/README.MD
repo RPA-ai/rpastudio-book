@@ -1,0 +1,8 @@
+- dotnet4.6.1离线安装包
+  - dotnet4.6.1离线安装包：NDP461-KB3102436-x86-x64-AllOS-ENU.exe
+  - dotnet4.6.1离线语言包安装包：NDP461-KB3102436-x86-x64-AllOS-CHS.exe
+- NuGet的VS扩展：NuGet.Tools.vsix
+- 微软Sysinternals Suite工具包中的管道查看命令行工具：PipeList.zip
+- actipro界面库：actipro-wpf-controls-19.1.0685.zip
+- nuget命令行程序：nuget.exe
+- Python3.7.2官方安装包：python-3.7.2.exe

@@ -1,0 +1,1 @@
+打开CMD并切换到当前python.exe所在目录，然后调用命令：python -m pip install <第三方组件库名>

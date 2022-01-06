@@ -1,0 +1,39 @@
+﻿<Window x:Class="AppDomainSample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AppDomainSample"
+        mc:Ignorable="d"
+        Title="AppDomain示例" Height="350" Width="525" WindowState="Maximized">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                <Button Name="LoadButton" Width="100" Height="25" Click="LoadButton_Click">加载设计器</Button>
+                <Button Name="UnloadButton" Width="100" Height="25" Margin="20,0,0,0" Click="UnloadButton_Click">卸载设计器</Button>
+                <Button Name="CrossAppDomainGetStringDataButton" Width="120" Height="25" Margin="20,0,0,0" Click="CrossAppDomainGetStringDataButton_Click">跨域获取字符串数据</Button>
+                <Button Name="CrossAppDomainGetUserDefineDataButton" Width="120" Height="25" Margin="20,0,0,0" Click="CrossAppDomainGetUserDefineDataButton_Click">跨域获取自定义数据</Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+            <Border Name="ActivitiesBorder" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">活动组件视图</TextBlock>
+            </Border>
+            <Border Name="DesignerBorder" Grid.Column="1" BorderBrush="LightGray" BorderThickness="1">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">设计视图</TextBlock>
+            </Border>
+            <Border Name="PropertyBorder" Grid.Column="2" BorderBrush="LightGray" BorderThickness="1">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">属性视图</TextBlock>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

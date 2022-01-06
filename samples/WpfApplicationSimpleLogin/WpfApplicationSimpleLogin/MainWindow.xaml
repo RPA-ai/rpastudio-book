@@ -1,0 +1,31 @@
+﻿<Window x:Class="WpfApplicationSimpleLogin.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApplicationSimpleLogin"
+        mc:Ignorable="d"
+        Title="简单登陆例子" Height="200" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--用户名-->
+        <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18">用户名：</TextBlock>
+        <TextBox Name="NameTextBox" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" FontSize="18"></TextBox>
+
+        <!--密码-->
+        <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18">密码：</TextBlock>
+        <PasswordBox Name="PwdPasswordBox"  Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" FontSize="18"></PasswordBox>
+
+        <Button Name="LoginButton" Grid.Row="2" Grid.ColumnSpan="2" Width="60" Height="25" Click="LoginButton_Click">登陆</Button>
+
+    </Grid>
+</Window>

@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ReflectionMagic</name>
+    </assembly>
+    <members>
+        <member name="M:ReflectionMagic.DynamicHelper.Unwrap(System.Object)">
+            <summary>
+            Unwraps the specified dynamic object.
+            </summary>
+            <param name="d">A wrapped object</param>
+            <returns>The unwrapped object.</returns>
+            <seealso cref="P:ReflectionMagic.PrivateReflectionDynamicObjectInstance.RealObject"/>
+            <seealso cref="P:ReflectionMagic.PrivateReflectionDynamicObjectStatic.RealObject"/>
+        </member>
+        <member name="T:ReflectionMagic.Field">
+            <summary>
+            Provides a mechanism to access fields through the <see cref="T:ReflectionMagic.IProperty"/> abstraction.
+            </summary>
+        </member>
+        <member name="M:ReflectionMagic.Field.#ctor(System.Reflection.FieldInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ReflectionMagic.Field"/> class wrapping the specified field.
+            </summary>
+            <param name="field">The field info to wrap.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="field"/> is <c>null</c>.</exception>
+        </member>
+        <member name="T:ReflectionMagic.IProperty">
+            <summary>
+            Defines an mechanism to access members (e.g. fields or properties) of objects in a consistent way.
+            </summary>
+        </member>
+        <member name="P:ReflectionMagic.IProperty.Name">
+            <summary>
+            Gets the name of the property.
+            </summary>
+        </member>
+        <member name="P:ReflectionMagic.IProperty.PropertyType">
+            <summary>
+            Gets the type of the property.
+            </summary>
+        </member>
+        <member name="M:ReflectionMagic.IProperty.GetValue(System.Object,System.Object[])">
+            <summary>
+            Returns the property value of a specified object with optional index values for indexed properties.
+            </summary>
+            <param name="obj">The object whose property value will be returned. </param>
+            <param name="index">Optional index values for indexed properties. The indexes of indexed properties are zero-based. This value should be null for non-indexed properties. </param>
+            <returns>The member value of the specified object.</returns>
+        </member>
+        <member name="M:ReflectionMagic.IProperty.SetValue(System.Object,System.Object,System.Object[])">
+            <summary>
+            Sets the property value of a specified object with optional index values for index properties.
+            </summary>
+            <param name="obj">The object whose property value will be set. </param>
+            <param name="value">The new property value. </param>
+            <param name="index">Optional index values for indexed properties. This value should be null for non-indexed properties. </param>
+        </member>
+        <member name="M:ReflectionMagic.PrivateReflectionDynamicObjectInstance.#ctor(System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ReflectionMagic.PrivateReflectionDynamicObjectInstance"/> class, wrapping the specified object.
+            </summary>
+            <param name="instance">The object to wrap.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="instance"/> is <c>null</c>.</exception>
+        </member>
+        <member name="P:ReflectionMagic.PrivateReflectionDynamicObjectInstance.RealObject">
+            <summary>
+            The object that the <see cref="T:ReflectionMagic.PrivateReflectionDynamicObjectInstance"/> wraps.
+            </summary>
+        </member>
+        <member name="M:ReflectionMagic.PrivateReflectionDynamicObjectStatic.#ctor(System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ReflectionMagic.PrivateReflectionDynamicObjectStatic"/> class, wrapping the specified type.
+            </summary>
+            <param name="type">The type to wrap.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="type"/> is <c>null</c>.</exception>
+        </member>
+        <member name="P:ReflectionMagic.PrivateReflectionDynamicObjectStatic.RealObject">
+            <summary>
+            The type that the <see cref="T:ReflectionMagic.PrivateReflectionDynamicObjectStatic"/> wraps.
+            </summary>
+        </member>
+        <member name="M:ReflectionMagic.PrivateReflectionUsingDynamicExtensions.AsDynamic(System.Object)">
+            <summary>
+            Wraps the specified object in a dynamic object that allows access to private members.
+            </summary>
+            <param name="o">The object to wrap</param>
+            <returns>The wrapped object.</returns>
+            <remarks>
+            Does not wrap <c>null</c>, <see cref="T:System.String"/>, primitive types, and already wrapped objects.
+            </remarks>
+            <seealso cref="T:ReflectionMagic.PrivateReflectionDynamicObjectInstance"/>
+        </member>
+        <member name="M:ReflectionMagic.PrivateReflectionUsingDynamicExtensions.AsDynamicType(System.Type)">
+            <summary>
+            Wraps the specified type in a dynamic object which allows easy instantion through the <see cref="M:ReflectionMagic.PrivateReflectionDynamicObjectStatic.New(System.Object[])"/> method.
+            </summary>
+            <param name="type">The type to wrap.</param>
+            <returns>The wrapped type.</returns>
+            <seealso cref="T:ReflectionMagic.PrivateReflectionDynamicObjectStatic"/>
+        </member>
+        <member name="M:ReflectionMagic.PrivateReflectionUsingDynamicExtensions.GetDynamicType(System.Reflection.Assembly,System.String)">
+            <summary>
+            Gets the type with the specified name from the specified assembly instance, and returns it as a dynamic object. See also <see cref="M:ReflectionMagic.PrivateReflectionUsingDynamicExtensions.AsDynamicType(System.Type)"/>.
+            </summary>
+            <param name="assembly">The assembly instance to search for the type.</param>
+            <param name="typeName">The type name.</param>
+            <returns>The wrapped type.</returns>
+            <seealso cref="M:ReflectionMagic.PrivateReflectionUsingDynamicExtensions.AsDynamicType(System.Type)"/>
+        </member>
+        <member name="M:ReflectionMagic.PrivateReflectionUsingDynamicExtensions.CreateDynamicInstance(System.Reflection.Assembly,System.String,System.Object[])">
+            <summary>
+            Tries to instantiate the type with the specified type name from the specified assembly instance using the specified constructor arguments.
+            </summary>
+            <param name="assembly">The assembly instance to search.</param>
+            <param name="typeName">The full type name.</param>
+            <param name="args">The arguments to pass to the constructor.</param>
+            <returns></returns>
+            <exception cref="T:System.MissingMethodException">Thrown when no suitable constructor can be found.</exception>
+        </member>
+        <member name="T:ReflectionMagic.Property">
+            <summary>
+            Provides an mechanism to access properties through the <see cref="T:ReflectionMagic.IProperty"/> abstraction.
+            </summary>
+        </member>
+        <member name="M:ReflectionMagic.Property.#ctor(System.Reflection.PropertyInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ReflectionMagic.Property"/> class wrapping the specified property.
+            </summary>
+            <param name="property">The property info to wrap.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="property"/> is <c>null</c>.</exception>
+        </member>
+    </members>
+</doc>

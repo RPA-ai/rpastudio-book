@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPCSample", "IPCSample\IPCSample.csproj", "{1CDB262B-3BD9-4F54-8E38-5C783D315C68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPCExecutor", "IPCExecutor\IPCExecutor.csproj", "{77BEA4C5-C893-44B7-8F10-BCF1C6C583F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessagesLibrary", "MessagesLibrary\MessagesLibrary.csproj", "{FC6F9E74-2355-4F2A-8690-B13362542B38}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1CDB262B-3BD9-4F54-8E38-5C783D315C68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CDB262B-3BD9-4F54-8E38-5C783D315C68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CDB262B-3BD9-4F54-8E38-5C783D315C68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CDB262B-3BD9-4F54-8E38-5C783D315C68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77BEA4C5-C893-44B7-8F10-BCF1C6C583F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77BEA4C5-C893-44B7-8F10-BCF1C6C583F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77BEA4C5-C893-44B7-8F10-BCF1C6C583F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77BEA4C5-C893-44B7-8F10-BCF1C6C583F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC6F9E74-2355-4F2A-8690-B13362542B38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC6F9E74-2355-4F2A-8690-B13362542B38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC6F9E74-2355-4F2A-8690-B13362542B38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC6F9E74-2355-4F2A-8690-B13362542B38}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

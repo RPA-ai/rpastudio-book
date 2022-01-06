@@ -1,0 +1,21 @@
+﻿<Application x:Class="WpfMVVMApplication.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:WpfMVVMApplication.ViewModel"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:WpfMVVMApplication"
+             xmlns:converters="clr-namespace:WpfMVVMApplication.Converters"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <!--系统自带了该转换器-->
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        
+        <!--扩展的转换器-->
+        <converters:OppositeBooleanToVisibilityConverter x:Key="OppositeBooleanToVisibilityConverter" />
+        <converters:BooleanToCollapsedVisibilityConverter x:Key="BooleanToCollapsedVisibilityConverter" />
+        <converters:OppositeBooleanToCollapsedVisibilityConverter x:Key="OppositeBooleanToCollapsedVisibilityConverter" />
+        
+        <!--全局ViewModel定位器-->
+        <vm:ViewModelLocator x:Key="Locator" />
+    </Application.Resources>
+</Application>
