@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://gitee.com/rpa_ai/rpastudio-book/raw/master/tools/img/RPAStudio.ico"width="150" />
+<img src="tools/img/RPAStudio.ico"width="150" />
 </p>
 <h1 align="center"> RPA机器人流程自动化-从0到1编写RPA工具</h1> 
 <p align="center">
