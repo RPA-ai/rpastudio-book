@@ -24,11 +24,11 @@
   
 ## 关于书籍
  
-  * [本书目录](https://gitee.com/rpa_ai/rpastudio-book/blob/master/books/zh/preface.md)
+  * [本书目录](books/zh/preface.md)
 
-  * [示例](https://gitee.com/rpa_ai/rpastudio-book/tree/master/samples)
+  * [示例](samples)
 
-  * [工具](https://gitee.com/rpa_ai/rpastudio-book/tree/master/tools)
+  * [工具](tools)
   
   * [RPAStudio下载](https://rpa.openserver.cn/download/RPAStudioSetup-v3.0.0.3(202112221121).exe)
 
