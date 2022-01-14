@@ -6,7 +6,7 @@
     <a href="http://rpa.openserver.cn">
         <img src="https://img.shields.io/badge/license-BSD-green.svg?style=flat" />
     </a>    
-     <a href="https://rpa.openserver.cn/download/RPAStudioSetup-v3.0.0.3(202112221121).exe">
+     <a href="https://rpa.openserver.cn/download/RPAStudioSetup-v3.0.0.4(202201141010).exe">
         <img src="https://img.shields.io/badge/download-80m-red.svg" />
     </a>
     </p>
@@ -30,7 +30,7 @@
 
   * [工具](tools)
   
-  * [RPAStudio下载](https://rpa.openserver.cn/download/RPAStudioSetup-v3.0.0.3(202112221121).exe)
+  * [RPAStudio下载](https://rpa.openserver.cn/download/RPAStudioSetup-v3.0.0.4(202201141010).exe)
 
 ## 版权声明
 
