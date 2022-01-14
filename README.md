@@ -1,12 +1,12 @@
 <p align="center">
-<img src="https://gitee.com/rpa_ai/rpastudio-book/raw/master/tools/img/RPAStudio.ico"width="150" />
+<img src="tools/img/RPAStudio.ico"width="150" />
 </p>
 <h1 align="center"> RPA机器人流程自动化-从0到1编写RPA工具</h1> 
 <p align="center">
     <a href="http://rpa.openserver.cn">
         <img src="https://img.shields.io/badge/license-BSD-green.svg?style=flat" />
     </a>    
-     <a href="https://rpa.openserver.cn/download/RPAStudioSetup-v3.0.0.3(202112221121).exe">
+     <a href="https://rpa.openserver.cn/download/RPAStudioSetup-v3.0.0.4(202201141010).exe">
         <img src="https://img.shields.io/badge/download-80m-red.svg" />
     </a>
     </p>
@@ -24,13 +24,13 @@
   
 ## 关于书籍
  
-  * [本书目录](https://gitee.com/rpa_ai/rpastudio-book/blob/master/books/zh/preface.md)
+  * [本书目录](books/zh/preface.md)
 
-  * [示例](https://gitee.com/rpa_ai/rpastudio-book/tree/master/samples)
+  * [示例](samples)
 
-  * [工具](https://gitee.com/rpa_ai/rpastudio-book/tree/master/tools)
+  * [工具](tools)
   
-  * [RPAStudio下载](https://rpa.openserver.cn/download/RPAStudioSetup-v3.0.0.3(202112221121).exe)
+  * [RPAStudio下载](https://rpa.openserver.cn/download/RPAStudioSetup-v3.0.0.4(202201141010).exe)
 
 ## 版权声明
 
