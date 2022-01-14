@@ -36,7 +36,7 @@
 
   * 图书许可证：[CC BY-SA 3.0 许可证](https://gitee.com/link?target=http%3A%2F%2Fcreativecommons.org%2Flicenses%2Fby-sa%2F3.0%2F)
 
-  * 代码许可证：[BSD 3-Clause 许可证]
+  * 代码许可证：[BSD 3-Clause 许可证](https://github.com/RPA-ai/rpastudio-book/blob/main/LICENSE)
 
 ## 社区
 
