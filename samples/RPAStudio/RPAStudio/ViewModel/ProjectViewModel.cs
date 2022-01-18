@@ -6,12 +6,14 @@ using Newtonsoft.Json.Linq;
 using RPA.Interfaces.Activities;
 using RPA.Interfaces.Project;
 using RPA.Interfaces.Service;
+using RPA.Interfaces.Share;
 using RPA.Shared.Configs;
 using RPA.Shared.Extensions;
 using RPA.Shared.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
@@ -125,6 +127,8 @@ namespace RPAStudio.ViewModel
                 mainXamlFileItem?.OpenXamlCommand.Execute(null);
             }
 
+            //项目打开后设置当前路径为项目路径
+            Directory.SetCurrentDirectory(SharedObject.Instance.ProjectPath);
         }
 
         private ProjectDependRootItemViewModel InitDependenciesItems()
