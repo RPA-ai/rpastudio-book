@@ -1,6 +1,8 @@
 # Try to exclude everything from linguist
 books/** linguist-vendored
 tools/** linguist-vendored
+samples/RPAStudioSetup/** linguist-vendored
+samples/RPAStudio/packages/** linguist-vendored
 
 # Include only self implemented code
 samples/** linguist-detectable
