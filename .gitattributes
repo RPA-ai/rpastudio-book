@@ -1,0 +1,6 @@
+# Try to exclude everything from linguist
+books/** linguist-vendored
+tools/** linguist-vendored
+
+# Include only self implemented code
+samples/** linguist-detectable
