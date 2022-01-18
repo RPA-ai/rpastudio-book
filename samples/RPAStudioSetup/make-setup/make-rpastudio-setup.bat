@@ -7,7 +7,7 @@
 set product_name=RPAStudio教学版设计器
 set robot_name=RPARobot教学版执行器
 set setup_exe_name=RPAStudioLearnSetup
-set product_copyright_year=2021
+set product_copyright_year=2022
 set product_version=1.0.0.1
 
 setlocal EnableDelayedExpansion
