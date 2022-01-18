@@ -57,5 +57,6 @@
 ![RibbonDockSample1](tools/img/RibbonDockSample1.png)
 ![RPAStudio0](tools/img/RPAStudio0.png)
 ![RPAStudio1](tools/img/RPAStudio1.png)
+![RPAStudio2](tools/img/RPAStudio2.png)
 ![TrackingParticipantSample0](tools/img/TrackingParticipantSample0.png)
 ![WorkflowActivitiesSample0](tools/img/WorkflowActivitiesSample0.png)
