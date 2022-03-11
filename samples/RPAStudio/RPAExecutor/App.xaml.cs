@@ -150,6 +150,8 @@ namespace RPAExecutor
                 initCommandLineJsonConfig(command_line_json_cfg);
             }
 
+            Directory.SetCurrentDirectory(SharedObject.Instance.ProjectPath);
+
             _manager.Run();
         }
 

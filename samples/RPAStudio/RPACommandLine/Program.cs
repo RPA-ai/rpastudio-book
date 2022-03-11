@@ -75,6 +75,10 @@ namespace RPACommandLine
                 changeLogPath(options.Log);
             }
 
+            //设置命令行的当前路径为项目路径
+            var projectDir = Path.GetDirectoryName(options.File);
+            Directory.SetCurrentDirectory(projectDir);
+
             _globalService.Options = options;
             _projectService = _serviceRegistry.ResolveType<IProjectService>();
             _projectService.Init(options.File);
