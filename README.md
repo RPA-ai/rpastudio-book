@@ -30,7 +30,9 @@
 
   * [工具](tools)
   
-  * [RPAStudio下载](https://rpa.openserver.cn/download/RPAStudioSetup-v3.0.0.4(202201141010).exe)
+  * [RPAStudio教学版下载](https://rpa.openserver.cn/download/RPAStudioLearnSetup-v1.0.0.1.exe)
+
+  * [RPAStudio下载](https://rpa.openserver.cn/download/RPAStudioSetup-v3.0.0.7(202206281914).exe)
 
 ## 版权声明
 
